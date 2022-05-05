@@ -93,7 +93,7 @@ const firebaseApp = {
 					// console.log("New", change.doc.data());
 				}
 				if (change.type === "modified") {
-					console.log(globalX, globalY);
+					//console.log(globalX, globalY);
 
 					const changedPerson = change.doc.data();
 

@@ -142,9 +142,8 @@ function MainChart({ loading, team }) {
 
 	function handleClick(e) {
 		// console.log(circleRefs)
-		console.log(circle[e.target.attrs.index]);
-
-		console.log(circleRefs.current[e.target.index].x(), circleRefs.current[e.target.index].y());
+		//console.log(circle[e.target.attrs.index]);
+		//console.log(circleRefs.current[e.target.index].x(), circleRefs.current[e.target.index].y());
 	}
 
 	// Middle of dragging
@@ -171,9 +170,9 @@ function MainChart({ loading, team }) {
 	}
 
 	function handleDragEnd(e) {
-		console.log(`id: ${e.target.attrs.index}, x: ${Math.round((circleRefs.current[e.target.attrs.index].x() / width).toFixed(2) * 100)}, y: ${Math.abs(Math.round((circleRefs.current[e.target.attrs.index].y() / height).toFixed(2) * 100) - 100)}`);
-		console.log(circleRefs.current[e.target.attrs.index].x(), circleRefs.current[e.target.attrs.index].y());
-		console.log(circle[e.target.attrs.index]);
+		// console.log(`id: ${e.target.attrs.index}, x: ${Math.round((circleRefs.current[e.target.attrs.index].x() / width).toFixed(2) * 100)}, y: ${Math.abs(Math.round((circleRefs.current[e.target.attrs.index].y() / height).toFixed(2) * 100) - 100)}`);
+		// console.log(circleRefs.current[e.target.attrs.index].x(), circleRefs.current[e.target.attrs.index].y());
+		// console.log(circle[e.target.attrs.index]);
 
 		updatePosition(
 			circle[e.target.attrs.index].firebaseId,
@@ -278,7 +277,7 @@ function MainChart({ loading, team }) {
 		});
 
 		return () => {
-			console.log("unmount");
+			//console.log("unmount");
 		};
 	}, []);
 
