@@ -378,12 +378,12 @@ function MainChart({ loading, team }) {
 												ref={(el) => (textRef.current[i] = el)}
 												x={circle.x}
 												y={height - circle.y}
-												offsetX={circle.name.length >= 6 ? 18 : circle.name.length > 4 ? 13 : 11}
+												offsetX={circle.name.length >= 6 ? 21 : circle.name.length > 4 ? 17 : 13}
 												offsetY={4}
 												align="center"
 												verticalAlign="middle"
 												fontFamily="Calibri"
-												// fontSize={9}
+												fontSize={15}
 											/>
 										) : null}
 									</Group>
