@@ -19,7 +19,7 @@ function vw(v) {
 let height = vh(75),
 	width = vw(90);
 
-const images = [];
+let images = [];
 
 function getImages(persons) {
 	const personsWithImages = persons.filter((person) => person.img);
@@ -99,6 +99,7 @@ function MainChart({ loading, team }) {
 	const [isLoading, setIsLoading] = useState(true);
 	const [subTeams, setSubTeams] = useState([]);
 	const [dropdownSelection, setDropdownSelection] = useState("All");
+	const firstRender = useRef(true);
 
 	const circleRefs = useRef([]);
 
@@ -188,13 +189,13 @@ function MainChart({ loading, team }) {
 	function handleCircleLayerMouseMove(e) {}
 
 	function getDropdownValue(option) {
-		setCircle((circle) => {
-			const newArr = circle.filter((c) => c.subTeam === option.toUpperCase());
+		// setCircle((circle) => {
+		// 	const newArr = circle.filter((c) => c.subTeam === option.toUpperCase());
 
-			console.log(newArr);
+		// 	console.log(newArr);
 
-			return newArr;
-		});
+		// 	return newArr;
+		// });
 		setDropdownSelection(option.toUpperCase());
 	}
 
@@ -209,12 +210,13 @@ function MainChart({ loading, team }) {
 			removeDuplicateDates(persons);
 
 			getImages(persons).then(() => {
-				console.log(team);
+				// console.log(persons);
 
 				setCircle(() => {
 					const newCircle = persons.map((person, idx) => {
 						if (person.img) {
-							let img = images.find((personImg) => personImg.person.details.displayName === person.details.displayName).img;
+							//console.log(images.find((personImg) => personImg.person.details.displayName === person.details.displayName));
+							let img = images.find((personImg) => personImg.person.details.displayName === person.details.displayName)?.img;
 
 							return {
 								id: idx,
@@ -280,48 +282,50 @@ function MainChart({ loading, team }) {
 	}, []);
 
 	useEffect(() => {
-		getPersonsFromFirebase(team).then((persons) => {
-			if (!(dropdownSelection.toUpperCase() === "ALL")) {
-				persons = persons.filter((person) => person.subTeam === dropdownSelection);
-			}
-
-			removeDuplicateDates(persons);
-
-			getImages(persons).then(() => {
-				console.log(team);
-
-				setCircle(() => {
-					const newCircle = persons.map((person, idx) => {
-						if (person.img) {
-							let img = images.find((personImg) => personImg.person.details.displayName === person.details.displayName).img;
-
+		if (!firstRender.current) {
+			images = [];
+			getPersonsFromFirebase(team).then((persons) => {
+				if (!(dropdownSelection.toUpperCase() === "ALL")) {
+					persons = persons.filter((person) => person.subTeam === dropdownSelection);
+				}
+				removeDuplicateDates(persons);
+				getImages(persons).then(() => {
+					// console.log(persons);
+					setCircle(() => {
+						const newCircle = persons.map((person, idx) => {
+							console.log(images);
+							if (person.img) {
+								console.log(images.find((personImg) => personImg.person.details.displayName === person.details.displayName));
+								let img = images.find((personImg) => personImg.person.details.displayName === person.details.displayName)?.img;
+								return {
+									id: idx,
+									x: (person.mood[person.mood.length - 1].xStress * width) / 100,
+									y: (person.mood[person.mood.length - 1].yMood * height) / 100,
+									name: person.details.displayName,
+									img: img,
+									firebaseId: person.id,
+									subTeam: person.subTeam,
+								};
+							}
 							return {
 								id: idx,
 								x: (person.mood[person.mood.length - 1].xStress * width) / 100,
 								y: (person.mood[person.mood.length - 1].yMood * height) / 100,
 								name: person.details.displayName,
-								img: img,
+								img: "",
 								firebaseId: person.id,
 								subTeam: person.subTeam,
 							};
-						}
-						return {
-							id: idx,
-							x: (person.mood[person.mood.length - 1].xStress * width) / 100,
-							y: (person.mood[person.mood.length - 1].yMood * height) / 100,
-							name: person.details.displayName,
-							img: "",
-							firebaseId: person.id,
-							subTeam: person.subTeam,
-						};
+						});
+						return newCircle;
 					});
-					return newCircle;
+					setIsLoading(false);
+					loading(false);
 				});
-
-				setIsLoading(false);
-				loading(false);
 			});
-		});
+		}
+
+		firstRender.current = false;
 	}, [dropdownSelection]);
 
 	return (
