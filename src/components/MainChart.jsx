@@ -236,6 +236,7 @@ function MainChart({ loading, team }) {
 							img: "",
 							firebaseId: person.id,
 							subTeam: person.subTeam,
+							color: person.details.defaultColor,
 						};
 					});
 					return newCircle;
@@ -315,6 +316,7 @@ function MainChart({ loading, team }) {
 								img: "",
 								firebaseId: person.id,
 								subTeam: person.subTeam,
+								color: person.details.defaultColor,
 							};
 						});
 						return newCircle;
@@ -353,7 +355,7 @@ function MainChart({ loading, team }) {
 											ref={(el) => (circleRefs.current[i] = el)}
 											width={65}
 											height={65}
-											//   fill="#00D2FF"
+											fill={circle.img ? "" : circle.color}
 											stroke="black"
 											strokeWidth={1}
 											draggable={true}
