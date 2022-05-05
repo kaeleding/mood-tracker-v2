@@ -1,0 +1,10 @@
+#parent {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 0 1rem;
+}
+
+div {
+    font-size: 2.5rem;
+}

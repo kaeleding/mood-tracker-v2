@@ -1,0 +1,15 @@
+#header {
+    display: flex;
+    justify-content: center;
+    padding: 1rem 0;
+}
+
+#header form {
+    margin-left: 1em;
+    font-size: 2rem;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}

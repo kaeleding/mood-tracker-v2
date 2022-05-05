@@ -1,0 +1,14 @@
+#imageContainer {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 10vw;
+    padding-right: 5vw;
+    margin-top: 1rem
+  }
+  
+  #labelContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
