@@ -294,9 +294,9 @@ function MainChart({ loading, team }) {
 					// console.log(persons);
 					setCircle(() => {
 						const newCircle = persons.map((person, idx) => {
-							console.log(images);
+							//console.log(images);
 							if (person.img) {
-								console.log(images.find((personImg) => personImg.person.details.displayName === person.details.displayName));
+								//console.log(images.find((personImg) => personImg.person.details.displayName === person.details.displayName));
 								let img = images.find((personImg) => personImg.person.details.displayName === person.details.displayName)?.img;
 								return {
 									id: idx,
