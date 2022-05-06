@@ -262,6 +262,10 @@ function MainChart({ loading, team }) {
 				stageRef.current.width(width);
 				stageRef.current.height(height);
 				stageRef.current.scale({ x: scale, y: scale });
+
+				setTimeout(() => {
+					window.location.reload();
+				}, 1000);
 			}
 
 			if (stageRef.current) {
