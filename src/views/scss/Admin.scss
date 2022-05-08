@@ -1,8 +1,15 @@
 #admin-header {
     display: flex;
     justify-content: center;
+    align-items: center;
     padding: 3rem 0;
     border-bottom: 1px solid #ccc;
+    flex-direction: column;
+}
+
+#admin-header h4 {
+    margin-top: 1rem;
+    color: red;
 }
 
 #form-parent {

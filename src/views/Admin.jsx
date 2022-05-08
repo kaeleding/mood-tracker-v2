@@ -187,6 +187,8 @@ function Admin() {
 				<>
 					<div id="admin-header">
 						<h1>Secret Admin Page</h1>
+						<h4>*TODO: Add fields validation (such as empty / duplicate fields on submit)!</h4>
+						<h4> So be careful when adding data for now :)</h4>
 					</div>
 
 					<div id="form-parent">
