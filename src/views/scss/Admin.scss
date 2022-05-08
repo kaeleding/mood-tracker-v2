@@ -131,7 +131,7 @@ body {
     left: 1rem;
     top: 0.9rem;
     padding: 0 0.5rem;
-    color: $drk-primary;
+    color: $clr-gray400;
     background-color: white;
     transition: top 200ms ease-in, left 200ms ease-in, font-size 200ms ease-in;
   }
@@ -174,6 +174,7 @@ body {
   top: -0.5rem;
   left: 0.8rem;
   font-size: 0.8rem;
+  color: $drk-primary
 }
 
 
