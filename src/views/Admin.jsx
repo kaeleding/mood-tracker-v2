@@ -194,6 +194,10 @@ function Admin() {
 					<div id="form-parent">
 						<form onSubmit={addTeam} className="form">
 							<h1 className="form__title">Add a Team</h1>
+							<p className="form__description">*Used for generating a new team page URL.</p>
+							<p className="form__description">
+								Ex. Team: LSF, so the url would be <a href="https://mood-tracker-v2.vercel.app/LSF">https://mood-tracker-v2.vercel.app/LSF</a> (not case sensitive)
+							</p>
 
 							<div className="form__group">
 								<input onChange={(e) => handleInput("addTeam", e)} type="text" id="team-name" className="form__input" placeholder=" " />
@@ -209,6 +213,8 @@ function Admin() {
 
 						<form onSubmit={addSubTeam} className="form">
 							<h1 className="form__title">Add Sub-Team</h1>
+							<p className="form__description">*Used on a team page's dropdown filtering.</p>
+							<p className="form__description">*Also used on the "Add Members" section dropdown.</p>
 
 							<div className="form__group">
 								<input onChange={(e) => handleInput("addSubTeam", e)} type="text" id="sub-team" className="form__input" placeholder=" " />
@@ -275,7 +281,7 @@ function Admin() {
 
 						<form className="form">
 							<h1 className="form__title">Remove Members</h1>
-							<p className="form__description">*Not yet functional</p>
+							<p className="form__description form__description__warning">*Not yet functional</p>
 
 							<ul id="member-list">
 								{members.map((member, idx) => {

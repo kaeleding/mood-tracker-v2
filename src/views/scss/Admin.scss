@@ -89,8 +89,14 @@ body {
 
   &__description {
     margin-bottom: 2rem;
-    color: red
+    color: #474747;
+
+   
   }
+
+  &__description__warning {
+    color: red;
+}
 
   &__group {
     position: relative;
