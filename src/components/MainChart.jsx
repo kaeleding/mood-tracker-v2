@@ -342,7 +342,7 @@ function MainChart({ loading, team }) {
 				) : (
 					<div>
 						<div id="header">
-							<p>How are you today?</p>
+							<p id="main-header">How are you today?</p>
 							<Dropdown options={subTeams} getDropdownValue={getDropdownValue} />
 						</div>
 
@@ -381,7 +381,7 @@ function MainChart({ loading, team }) {
 												ref={(el) => (textRef.current[i] = el)}
 												x={circle.x}
 												y={height - circle.y}
-												offsetX={circle.name.length >= 6 ? 21 : circle.name.length > 4 ? 17 : 13}
+												offsetX={circle.name.length >= 8 ? 27 : circle.name.length > 6 ? 21 : circle.name.length > 4 ? 17 : 13}
 												offsetY={4}
 												align="center"
 												verticalAlign="middle"

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import firebaseApp from "../util/firebase";
 import LoadingOverlay from "react-loading-overlay";
-import "./css/Admin.css";
+import "./scss/Admin.scss";
 
 LoadingOverlay.propTypes = undefined;
 
@@ -51,6 +51,7 @@ function Admin() {
 	const [addTeamText, setAddTeamText] = useState("");
 	const [addSubTeamText, setAddSubTeamText] = useState("");
 	const [addMemberText, setAddMemberText] = useState("");
+	const [addMemberColor, setAddMemberColor] = useState("");
 	const [members, setMembers] = useState([]);
 
 	function addMember(event) {
@@ -60,6 +61,7 @@ function Admin() {
 		addPersonToFirebase({
 			details: {
 				displayName: addMemberText,
+				defaultColor: addMemberColor,
 			},
 			isActive: true,
 			mood: [{ xStress: 50, yMood: 50, timestamp: getPhilippineTime() }],
@@ -120,6 +122,10 @@ function Admin() {
 			case "addMember":
 				setAddMemberText(event.target.value);
 				break;
+			case "addColor":
+				setAddMemberColor(event.target.value);
+				console.log(event.target.value);
+				break;
 			default:
 				break;
 		}
@@ -161,6 +167,8 @@ function Admin() {
 				setLoading(false);
 			});
 		});
+
+		setAddMemberColor(`#${Math.floor(Math.random() * 16777215).toString(16)}`);
 	}, []);
 
 	useEffect(() => {
@@ -176,54 +184,96 @@ function Admin() {
 			{isLoading ? (
 				<LoadingOverlay />
 			) : (
-				<div style={{ height: "100vh" }}>
-					<div className="forms">
-						<h3>Add a Team</h3>
-						<form onSubmit={addTeam} id="manage-team-form">
-							<input onChange={(e) => handleInput("addTeam", e)} type="text" name="name" placeholder="Team Name" />
-
-							<button type="submit">Add Team</button>
-						</form>
+				<>
+					<div id="admin-header">
+						<h1>Secret Admin Page</h1>
 					</div>
 
-					<div className="forms">
-						<h3>Manage Teams</h3>
-						<form>
-							<select className="dropdown" onChange={getSelectedTeam}>
-								{teams.map((team) => {
-									return <option value={team.team}>{team.team}</option>;
-								})}
-							</select>
-						</form>
-					</div>
+					<div id="form-parent">
+						<form onSubmit={addTeam} className="form">
+							<h1 className="form__title">Add a Team</h1>
 
-					<div className="forms">
-						<form onSubmit={addSubTeam} className="member-form">
-							<h6>Add Sub-Team</h6>
+							<div className="form__group">
+								<input onChange={(e) => handleInput("addTeam", e)} type="text" id="team-name" className="form__input" placeholder=" " />
+								<label htmlFor="team-name" className="form__label">
+									Team Name
+								</label>
+							</div>
 
-							<input onChange={(e) => handleInput("addSubTeam", e)} type="text" name="name" placeholder="Sub-Team Name" />
-
-							<button type="submit">Add Sub-Team</button>
+							<button type="submit" className="form__button">
+								Add Team
+							</button>
 						</form>
 
-						<form onSubmit={addMember} className="member-form">
-							<h6>Add Members</h6>
+						<form onSubmit={addSubTeam} className="form">
+							<h1 className="form__title">Add Sub-Team</h1>
 
-							<input onChange={(e) => handleInput("addMember", e)} type="text" name="name" placeholder="Display Name" />
+							<div className="form__group">
+								<input onChange={(e) => handleInput("addSubTeam", e)} type="text" id="sub-team" className="form__input" placeholder=" " />
+								<label htmlFor="sub-team" className="form__label">
+									Sub-Team Name
+								</label>
+							</div>
 
-							<select ref={subTeamRef} onChange={subTeamChange} className="dropdown">
-								{teams
-									?.find((team) => team.team === selectedTeam)
-									?.subTeams?.map((subTeam) => {
-										return <option value={subTeam}>{subTeam}</option>;
+							<button type="submit" className="form__button">
+								Add Sub-Team
+							</button>
+						</form>
+
+						<form className="form">
+							<h1 className="form__title">Manage Teams</h1>
+
+							<div className="form__group">
+								<select className="form__input dropdown" onChange={getSelectedTeam}>
+									{teams.map((team) => {
+										return <option value={team.team}>{team.team}</option>;
 									})}
-							</select>
+								</select>
 
-							<button type="submit">Add Member</button>
+								<label className="form__label">Team</label>
+							</div>
 						</form>
 
-						<form className="member-form">
-							<h6>Remove Members</h6>
+						<form onSubmit={addMember} className="form">
+							<h1 className="form__title">Add Members</h1>
+
+							<div className="form__group">
+								<input onChange={(e) => handleInput("addMember", e)} type="text" placeholder=" " id="add-member" className="form__input" />
+								<label htmlFor="add-member" className="form__label">
+									Member Name
+								</label>
+							</div>
+
+							<div className="form__group">
+								<select ref={subTeamRef} onChange={subTeamChange} className="form__input dropdown">
+									{teams
+										?.find((team) => team.team === selectedTeam)
+										?.subTeams?.map((subTeam) => {
+											return <option value={subTeam}>{subTeam}</option>;
+										})}
+								</select>
+							</div>
+
+							<button type="submit" className="form__button">
+								Add Member
+							</button>
+						</form>
+
+						<form className="form">
+							<h1 className="form__title">Add Display Color</h1>
+							<p className="form__description"></p>
+
+							<div className="form__group">
+								<input onChange={(e) => handleInput("addColor", e)} type="color" placeholder=" " id="color-member" className="form__input" defaultValue={addMemberColor} />
+								<label htmlFor="color-member" className="form__label">
+									Display Color
+								</label>
+							</div>
+						</form>
+
+						<form className="form">
+							<h1 className="form__title">Remove Members</h1>
+							<p className="form__description">*Not yet functional</p>
 
 							<ul id="member-list">
 								{members.map((member, idx) => {
@@ -239,7 +289,7 @@ function Admin() {
 							</ul>
 						</form>
 					</div>
-				</div>
+				</>
 			)}
 		</div>
 	);

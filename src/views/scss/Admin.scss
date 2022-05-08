@@ -1,0 +1,168 @@
+#admin-header {
+    display: flex;
+    justify-content: center;
+    padding: 3rem 0;
+    border-bottom: 1px solid #ccc;
+}
+
+#form-parent {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 10rem;
+}
+
+#member-list {
+    height: 300px;
+    overflow: hidden;
+    overflow-y: scroll;
+    list-style-type: none;
+    border: 1px solid black;
+    padding-left: 0px;
+}
+
+#member-list * {
+    font-size: 1rem;
+}
+
+#member-list div {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    border-bottom: 1px solid #eceff4;
+}
+
+#remove-member {
+    cursor: pointer;
+}
+
+/*   color variables */
+$clr-primary: #848484;
+$clr-primary-hover: #464646;
+$clr-primary-dark: #464646;
+$clr-primary-light: #c7f5ff;
+$clr-gray100: #f0f7f8;
+$clr-gray200: #cfd8dc;
+$clr-gray300: #a7b7be;
+$clr-gray400: #6b7e86;
+$clr-gray500: #425a65;
+
+$drk-primary: #060b23;
+
+/*   border radius */
+$radius: 1rem;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Karla", sans-serif;
+  font-weight: 600;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.form {
+  padding: 3rem;
+  border-radius: $radius;
+  background-color: white;
+
+  &__title {
+    margin-bottom: 2rem;
+    color: $drk-primary;
+  }
+
+  &__description {
+    margin-bottom: 2rem;
+    color: red
+  }
+
+  &__group {
+    position: relative;
+    height: 3rem;
+    margin-bottom: 1.5rem;
+  }
+
+  &__input {
+    width: 100%;
+    height: 100%;
+    border: 2px solid $clr-gray200;
+    border-radius: 0.5rem;
+    font-family: inherit;
+    font-weight: inherit;
+    color: $drk-primary;
+    outline: none;
+    padding: 1.25rem;
+    background: none;
+
+    &:hover {
+      border-color: $clr-primary;
+    }
+
+    &:focus {
+      border-color: $clr-primary-dark;
+    }
+  }
+
+  &__label {
+    cursor: text;
+    position: absolute;
+    left: 1rem;
+    top: 0.9rem;
+    padding: 0 0.5rem;
+    color: $drk-primary;
+    background-color: white;
+    transition: top 200ms ease-in, left 200ms ease-in, font-size 200ms ease-in;
+  }
+
+  &__button {
+      width: 100%;
+    color: white;
+    display: block;
+    margin-left: auto;
+    padding: 0.75rem 2rem;
+    background-color: $clr-primary;
+    font-family: inherit;
+    font-weight: inherit;
+    border-radius: 0.5rem;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    transition: background-color 200ms ease-in;
+
+    &:hover {
+      background-color: $clr-primary-dark;
+    }
+  }
+}
+
+.dropdown {
+  padding: 0 1rem;
+}
+
+.dropdown option {
+  font-size: 1.2rem;
+}
+
+#color-member {
+    padding: 0.5rem;
+}
+
+.form__input:focus ~ .form__label,
+.form__input:not(:placeholder-shown).form__input:not(:focus) ~ .form__label {
+  top: -0.5rem;
+  left: 0.8rem;
+  font-size: 0.8rem;
+}
+
+
+
+
